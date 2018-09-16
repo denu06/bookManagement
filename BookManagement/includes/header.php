@@ -43,7 +43,7 @@
 <div class="header">
 	<div class="container">
 		<div class="logo wow fadeInDown animated" data-wow-delay=".5s">
-			<a href="index.php">Tours &  Travels <span>Management System</span></a>	
+			<a href="index.php">Book <span>Management System</span></a>	
 		</div>
 	
 		<div class="lock fadeInDown animated" data-wow-delay=".5s"> 

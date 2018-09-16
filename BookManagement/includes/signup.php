@@ -6,18 +6,21 @@ $fname=$_POST['fname'];
 $mnumber=$_POST['mobilenumber'];
 $email=$_POST['email'];
 $password=md5($_POST['password']);
-$sql="INSERT INTO  tblusers(FullName,MobileNumber,EmailId,Password) VALUES(:fname,:mnumber,:email,:password)";
+$role=$_POST['role'];
+$sql="INSERT INTO  tblusers(FullName,MobileNumber,EmailId,Password,Role) VALUES(:fname,:mnumber,:email,:password,:role)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':fname',$fname,PDO::PARAM_STR);
 $query->bindParam(':mnumber',$mnumber,PDO::PARAM_STR);
 $query->bindParam(':email',$email,PDO::PARAM_STR);
 $query->bindParam(':password',$password,PDO::PARAM_STR);
+$query->bindParam(':role',$role,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-$_SESSION['msg']="You are Scuccessfully registered. Now you can login ";
+$_SESSION['msg']="You are Successfully registered. Now you can login ";
 header('location:thankyou.php');
+
 }
 else 
 {
@@ -64,6 +67,10 @@ error:function (){}
 				<input type="text" value="" placeholder="Mobile number" maxlength="10" name="mobilenumber" autocomplete="off" required="">
 		<input type="text" value="" placeholder="Email id" name="email" id="email" onBlur="checkAvailability()" autocomplete="off"  required="">	
 		 <span id="user-availability-status" style="font-size:12px;"></span> 
+		 <select name="role">
+		 <option>User</option>
+		 <option>Seller</option>
+		 </select>
 	<input type="password" value="" placeholder="Password" name="password" required="">	
 													<input type="submit" name="submit" id="submit" value="CREATE ACCOUNT">
 												</form>

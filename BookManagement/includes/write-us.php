@@ -14,7 +14,7 @@ $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-$_SESSION['msg']="Info successfully submited ";
+$_SESSION['msg']="Info successfully submited";
 echo "<script type='text/javascript'> document.location = 'thankyou.php'; </script>";
 }
 else 

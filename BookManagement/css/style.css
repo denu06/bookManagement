@@ -1506,11 +1506,27 @@ button.subbtn:focus, button.subbtn:hover {
     font-weight: normal;
     background: none;
     border: 1px solid #E6E4E4;
-    color: #D2D1D1;
+    color: #111111;
     outline: none;
     font-size: 14px;
     margin-top: 20px;
+    
 }
+
+.login-right select{
+  width: 100%;
+    padding: 10px;
+    font-weight: normal;
+    background: none;
+    border: 1px solid #E6E4E4;
+    color: #111111;
+    outline: none;
+    font-size: 14px;
+    margin-top: 20px;
+    height:43px;
+    
+}
+
 .login-right h4{
 	color:#48cfc1;
 	font-size:12px;
@@ -3669,6 +3685,11 @@ li.mr {
 .login-right input[type="submit"] {
     font-size: 14px;
 }
+
+.login-right select {
+    font-size: 14px;
+}
+
 .writ input[type="text"] {
     font-size: 14px;
 	width: 100%;
