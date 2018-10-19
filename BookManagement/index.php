@@ -33,12 +33,13 @@ include('includes/config.php');
 <?php include('includes/header.php');?>
 <div class="banner">
 	<div class="container">
-		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;"> Tours & Travels Management System</h1>
+		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">Book Management System</h1>
 	</div>
 </div>
 
 
 <!--- rupes ---->
+<!---
 <div class="container">
 	<div class="rupes">
 		<div class="col-md-4 rupes-left wow fadeInDown animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
@@ -77,6 +78,7 @@ include('includes/config.php');
 	
 	</div>
 </div>
+-->
 <!--- /rupes ---->
 
 
@@ -90,10 +92,10 @@ include('includes/config.php');
 
 
 	
-	<h3>Package List</h3>
+	<h3>Books List</h3>
 
 					
-<?php $sql = "SELECT * from tbltourpackages order by rand() limit 4";
+<?php $sql = "SELECT * from tbltourpackagess order by rand() limit 4"; // //Changed the table name need to restore
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -122,7 +124,7 @@ foreach($results as $result)
 <?php }} ?>
 			
 		
-<div><a href="package-list.php" class="view">View More Packages</a></div>
+<div><a href="package-list.php" class="view">View More Books</a></div>
 </div>
 			<div class="clearfix"></div>
 	</div>
@@ -130,6 +132,7 @@ foreach($results as $result)
 
 
 <!--- routes ---->
+<!---
 <div class="routes">
 	<div class="container">
 		<div class="col-md-4 routes-left wow fadeInRight animated" data-wow-delay=".5s">
@@ -164,7 +167,7 @@ foreach($results as $result)
 		</div>
 		<div class="clearfix"></div>
 	</div>
-</div>
+</div>-->
 
 <?php include('includes/footer.php');?>
 <!-- signup -->

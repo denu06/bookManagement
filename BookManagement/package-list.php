@@ -6,9 +6,11 @@ include('includes/config.php');
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>TTMS  | Package List</title>
+<title>Book Management System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+
 <script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -32,7 +34,7 @@ include('includes/config.php');
 <!--- banner ---->
 <div class="banner-3">
 	<div class="container">
-		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;"> TTMS- Package List</h1>
+		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">List of Books</h1>
 	</div>
 </div>
 <!--- /banner ---->
@@ -41,10 +43,10 @@ include('includes/config.php');
 	<div class="container">
 		
 		<div class="room-bottom">
-			<h3>Package List</h3>
+		<!-- 	<h3>Package List</h3> -->
 
 					
-<?php $sql = "SELECT * from tbltourpackages";
+<?php $sql = "SELECT * from tbltourpackagess"; //Changed the table name need to restore
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -75,6 +77,9 @@ foreach($results as $result)
 		
 		
 		</div>
+		
+		
+		
 	</div>
 </div>
 <!--- /rooms ---->
