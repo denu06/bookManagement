@@ -111,7 +111,7 @@ foreach($results as $result)
 							<td><?php echo htmlentities($result->BookAuthor);?></td>
 							<td><?php echo htmlentities($result->BookPrice);?></td>
 							<td><?php echo htmlentities($result->Creationdate);?></td>
-							<td><a href="update-package.php?pid=<?php echo htmlentities($result->BookId);?>"><button type="button" class="btn btn-primary btn-block">View Details</button></a></td>
+							<td><a href="update-book.php?pid=<?php echo htmlentities($result->BookId);?>"><button type="button" class="btn btn-primary btn-block">View Details</button></a></td>
 						  </tr>
 						 <?php $cnt=$cnt+1;} }?>
 						</tbody>

@@ -154,7 +154,7 @@ foreach($results as $result)
 							<td><?php echo htmlentities($result->fname);?></td>
 							<td><?php echo htmlentities($result->mnumber);?></td>
 							<td><?php echo htmlentities($result->email);?></td>
-							<td><a href="update-package.php?pid=<?php echo htmlentities($result->pid);?>"><?php echo htmlentities($result->pckname);?></a></td>
+							<td><a href="update-book.php?pid=<?php echo htmlentities($result->pid);?>"><?php echo htmlentities($result->pckname);?></a></td>
 							<td><?php echo htmlentities($result->fdate);?> To <?php echo htmlentities($result->tdate);?></td>
 								<td><?php echo htmlentities($result->comment);?></td>
 								<td><?php if($result->status==0)

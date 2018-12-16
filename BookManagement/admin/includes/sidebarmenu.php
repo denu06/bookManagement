@@ -9,8 +9,8 @@
 										
 									 <li id="menu-academico" ><a href="#"><i class="fa fa-book" aria-hidden="true"></i><span>Books</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
 										   <ul id="menu-academico-sub" >
-										   <li id="menu-academico-avaliacoes" ><a href="create-package.php">Create</a></li>
-											<li id="menu-academico-avaliacoes" ><a href="manage-packages.php">Manage</a></li>
+										   <li id="menu-academico-avaliacoes" ><a href="add-book.php">Create</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="manage-books.php">Manage</a></li>
 										  </ul>
 										</li>
 										
