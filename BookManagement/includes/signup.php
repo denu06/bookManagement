@@ -7,13 +7,19 @@ $mnumber=$_POST['mobilenumber'];
 $email=$_POST['email'];
 $password=md5($_POST['password']);
 $role=$_POST['role'];
-$sql="INSERT INTO  tblusers(FullName,MobileNumber,EmailId,Password,Role) VALUES(:fname,:mnumber,:email,:password,:role)";
+$isActive=1;
+if($role=="Seller")
+{
+    $isActive=0;
+}
+$sql="INSERT INTO  tblusers(FullName,MobileNumber,EmailId,Password,Role,isActive) VALUES(:fname,:mnumber,:email,:password,:role,:isActive)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':fname',$fname,PDO::PARAM_STR);
 $query->bindParam(':mnumber',$mnumber,PDO::PARAM_STR);
 $query->bindParam(':email',$email,PDO::PARAM_STR);
 $query->bindParam(':password',$password,PDO::PARAM_STR);
 $query->bindParam(':role',$role,PDO::PARAM_STR);
+$query->bindParam(':isActive',$isActive,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)

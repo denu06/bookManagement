@@ -46,7 +46,7 @@ include('includes/config.php');
 		<!-- 	<h3>Package List</h3> -->
 
 					
-<?php $sql = "SELECT * from tbltourpackages"; //Changed the table name need to restore
+<?php $sql = "SELECT * from tblbooks"; //Changed the table name need to restore
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -57,16 +57,16 @@ foreach($results as $result)
 {	?>
 			<div class="rom-btm">
 				<div class="col-md-3 room-left wow fadeInLeft animated" data-wow-delay=".5s">
-					<img src="admin/pacakgeimages/<?php echo htmlentities($result->PackageImage);?>" class="img-responsive" alt="">
+					<img src="admin/pacakgeimages/<?php echo htmlentities($result->BookImage);?>" class="img-responsive" alt="">
 				</div>
 				<div class="col-md-6 room-midle wow fadeInUp animated" data-wow-delay=".5s">
-					<h4>Book Name: <?php echo htmlentities($result->PackageName);?></h4>
-					<h6>Book Type : <?php echo htmlentities($result->PackageType);?></h6>
-					<p><b>Author :</b> <?php echo htmlentities($result->PackageLocation);?></p>
+					<h4>Book Name: <?php echo htmlentities($result->BookName);?></h4>
+					<h6>Book Type : <?php echo htmlentities($result->BookType);?></h6>
+					<p><b>Author :</b> <?php echo htmlentities($result->BookAuthor);?></p>
 				</div>
 				<div class="col-md-3 room-right wow fadeInRight animated" data-wow-delay=".5s">
-					<h5>INR <?php echo htmlentities($result->PackagePrice);?></h5>
-					<a href="package-details.php?pkgid=<?php echo htmlentities($result->PackageId);?>" class="view">Details</a>
+					<h5>INR <?php echo htmlentities($result->BookPrice);?></h5>
+					<a href="package-details.php?pkgid=<?php echo htmlentities($result->BookId);?>" class="view">Details</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>

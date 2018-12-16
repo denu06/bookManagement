@@ -9,6 +9,7 @@ if (ini_get("session.use_cookies")) {
     );
 }
 unset($_SESSION['alogin']);
+unset($_SESSION['role']);
 session_destroy(); // destroy session
 header("location:index.php"); 
 ?>

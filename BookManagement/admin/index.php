@@ -5,14 +5,21 @@ if(isset($_POST['login']))
 {
 $uname=$_POST['username'];
 $password=md5($_POST['password']);
-$sql ="SELECT UserName,Password FROM admin WHERE UserName=:uname and Password=:password";
+$sql ="SELECT EmailId,Password,Role FROM tblusers WHERE EmailId=:email and Password=:password and isActive=1 and Role in('Admin','Seller')";
 $query= $dbh -> prepare($sql);
-$query-> bindParam(':uname', $uname, PDO::PARAM_STR);
+$query-> bindParam(':email', $uname, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+
 if($query->rowCount() > 0)
 {
+    
+    foreach($results as $result)
+    {
+        $role=$result->Role;
+    }
+        $_SESSION['role']=$role;
 $_SESSION['alogin']=$_POST['username'];
 echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
 } else{

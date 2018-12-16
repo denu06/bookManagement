@@ -43,6 +43,12 @@ else{
             </ol>
 <!--four-grids here-->
 		<div class="four-grids">
+		
+	<?php
+										if($_SESSION['role']=="Admin")
+										{
+										?>
+		
 					<div class="col-md-3 four-grid">
 						<div class="four-agileits">
 							<div class="icon">
@@ -62,7 +68,7 @@ $cnt=$query->rowCount();
 							</div>
 							
 						</div>
-					</div>
+					</div><?php }?>
 					<div class="col-md-3 four-grid">
 						<div class="four-agileinfo">
 							<div class="icon">
@@ -82,6 +88,12 @@ $cnt1=$query1->rowCount();
 							
 						</div>
 					</div>
+					
+					<?php
+										if($_SESSION['role']=="Admin")
+										{
+										?>
+					
 					<div class="col-md-3 four-grid">
 						<div class="four-w3ls">
 							<div class="icon">
@@ -101,6 +113,9 @@ $cnt2=$query2->rowCount();
 							
 						</div>
 					</div>
+					
+					<?php }?>
+					
 					<div class="col-md-3 four-grid">
 						<div class="four-wthree">
 							<div class="icon">

@@ -4,19 +4,14 @@ error_reporting(0);
 include('includes/config.php');
 if(isset($_POST['submit2']))
 {
-$pid=intval($_GET['pkgid']);
+$bid=intval($_GET['pkgid']);
 $useremail=$_SESSION['login'];
-$fromdate=$_POST['fromdate'];
-$todate=$_POST['todate'];
-$comment=$_POST['comment'];
+
 $status=0;
-$sql="INSERT INTO tblbooking(PackageId,UserEmail,FromDate,ToDate,Comment,status) VALUES(:pid,:useremail,:fromdate,:todate,:comment,:status)";
+$sql="INSERT INTO tblbooking(BookId,UserEmail,status) VALUES(:bid,:useremail,:status)";
 $query = $dbh->prepare($sql);
-$query->bindParam(':pid',$pid,PDO::PARAM_STR);
+$query->bindParam(':bid',$bid,PDO::PARAM_STR);
 $query->bindParam(':useremail',$useremail,PDO::PARAM_STR);
-$query->bindParam(':fromdate',$fromdate,PDO::PARAM_STR);
-$query->bindParam(':todate',$todate,PDO::PARAM_STR);
-$query->bindParam(':comment',$comment,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
@@ -34,7 +29,7 @@ $error="Something went wrong. Please try again";
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>TTMS | Package Details</title>
+<title>BMS | Book Details</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -84,7 +79,7 @@ $error="Something went wrong. Please try again";
 <?php include('includes/header.php');?>
 <div class="banner-3">
 	<div class="container">
-		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;"> TTMS -Package Details</h1>
+		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;"> BMS -Book Details</h1>
 	</div>
 </div>
 <!--- /banner ---->
@@ -95,7 +90,7 @@ $error="Something went wrong. Please try again";
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 <?php 
 $pid=intval($_GET['pkgid']);
-$sql = "SELECT * from tbltourpackages where PackageId=:pid";
+$sql = "SELECT * from tblbooks where BookId=:pid";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':pid', $pid, PDO::PARAM_STR);
 $query->execute();
@@ -109,15 +104,14 @@ foreach($results as $result)
 <form name="book" method="post">
 		<div class="selectroom_top">
 			<div class="col-md-4 selectroom_left wow fadeInLeft animated" data-wow-delay=".5s">
-				<img src="admin/pacakgeimages/<?php echo htmlentities($result->PackageImage);?>" class="img-responsive" alt="">
+				<img src="admin/pacakgeimages/<?php echo htmlentities($result->BookImage);?>" class="img-responsive" alt="">
 			</div>
 			<div class="col-md-8 selectroom_right wow fadeInRight animated" data-wow-delay=".5s">
-				<h2><?php echo htmlentities($result->PackageName);?></h2>
-				<p class="dow">#PKG-<?php echo htmlentities($result->PackageId);?></p>
-				<p><b>Package Type :</b> <?php echo htmlentities($result->PackageType);?></p>
-				<p><b>Package Location :</b> <?php echo htmlentities($result->PackageLocation);?></p>
-					<p><b>Features</b> <?php echo htmlentities($result->PackageFetures);?></p>
-					<div class="ban-bottom">
+				<h2><?php echo htmlentities($result->BookName);?></h2>
+				<p class="dow">#PKG-<?php echo htmlentities($result->BookId);?></p>
+				<p><b>Book Type :</b> <?php echo htmlentities($result->BookType);?></p>
+					<p><b>Book Author</b> <?php echo htmlentities($result->BookAuthor);?></p>
+					<!-- <div class="ban-bottom">
 				<div class="bnr-right">
 				<label class="inputLabel">From</label>
 				<input class="date" id="datepicker" type="text" placeholder="dd-mm-yyyy"  name="fromdate" required="">
@@ -126,27 +120,29 @@ foreach($results as $result)
 				<label class="inputLabel">To</label>
 				<input class="date" id="datepicker1" type="text" placeholder="dd-mm-yyyy" name="todate" required="">
 			</div>
-			</div>
+			</div> -->
 						<div class="clearfix"></div>
 				<div class="grand">
 					<p>Grand Total</p>
-					<h3>INR <?php echo htmlentities($result->PackagePrice);?></h3>
+					<h3>INR <?php echo htmlentities($result->BookPrice);?></h3>
 
 				</div>
 			</div>
-		<h3>Package Details</h3>
-				<p style="padding-top: 1%"><?php echo htmlentities($result->PackageDetails);?> </p>	
+		<h3>Book Details</h3>
+				<p style="padding-top: 1%"><?php echo htmlentities($result->BookDetails);?> </p>	
 				<div class="clearfix"></div>
+				
 		</div>
+		
 		<div class="selectroom_top">
-			<h2>Travels</h2>
+			<!-- <h2>Travels</h2> -->
 			<div class="selectroom-info animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms" style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp; margin-top: -70px">
 				<ul>
 				
-					<li class="spe">
+					<!-- <li class="spe">
 						<label class="inputLabel">Comment</label>
 						<input class="special" type="text" name="comment" required="">
-					</li>
+					</li> -->
 					<?php if($_SESSION['login'])
 					{?>
 						<li class="spe" align="center">
