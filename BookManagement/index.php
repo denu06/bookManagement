@@ -95,7 +95,7 @@ include('includes/config.php');
 	<h3>Books List</h3>
 
 					
-<?php $sql = "SELECT * from tbltourpackagess order by rand() limit 4"; // //Changed the table name need to restore
+<?php $sql = "SELECT * from tbltourpackages order by rand() limit 4"; // //Changed the table name need to restore
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -109,10 +109,9 @@ foreach($results as $result)
 					<img src="admin/pacakgeimages/<?php echo htmlentities($result->PackageImage);?>" class="img-responsive" alt="">
 				</div>
 				<div class="col-md-6 room-midle wow fadeInUp animated" data-wow-delay=".5s">
-					<h4>Package Name: <?php echo htmlentities($result->PackageName);?></h4>
-					<h6>Package Type : <?php echo htmlentities($result->PackageType);?></h6>
-					<p><b>Package Location :</b> <?php echo htmlentities($result->PackageLocation);?></p>
-					<p><b>Features</b> <?php echo htmlentities($result->PackageFetures);?></p>
+					<h4>Book Name: <?php echo htmlentities($result->PackageName);?></h4>
+					<h6>Book Type : <?php echo htmlentities($result->PackageType);?></h6>
+					<p><b>Author :</b> <?php echo htmlentities($result->PackageLocation);?></p>
 				</div>
 				<div class="col-md-3 room-right wow fadeInRight animated" data-wow-delay=".5s">
 					<h5>INR <?php echo htmlentities($result->PackagePrice);?></h5>
@@ -132,7 +131,7 @@ foreach($results as $result)
 
 
 <!--- routes ---->
-<!---
+
 <div class="routes">
 	<div class="container">
 		<div class="col-md-4 routes-left wow fadeInRight animated" data-wow-delay=".5s">
@@ -167,7 +166,7 @@ foreach($results as $result)
 		</div>
 		<div class="clearfix"></div>
 	</div>
-</div>-->
+</div>
 
 <?php include('includes/footer.php');?>
 <!-- signup -->

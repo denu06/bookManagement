@@ -7,11 +7,29 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{ 
+    
+    
+    if(isset($_REQUEST['eid']))
+    {
+        $eid=intval($_GET['eid']);
+        $status=1;
+        
+        $sql = "UPDATE tblusers SET isActive=:status WHERE  id=:eid";
+        $query = $dbh->prepare($sql);
+        $query -> bindParam(':status',$status, PDO::PARAM_STR);
+        $query-> bindParam(':eid',$eid, PDO::PARAM_STR);
+        $query -> execute();
+        
+        $msg="Seller successfully confirmed";
+    }
+    
+    
+    
 	?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Book Management System</title>
+<title>TTMS | Admin Confirm Sellers</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -74,46 +92,58 @@ else{
 				</div>
 <!--heder end here-->
 <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Manage Books</li>
+                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Manage Sellers</li>
             </ol>
 <div class="agile-grids">	
 				<!-- tables -->
-				
+				<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
+				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 				<div class="agile-tables">
 					<div class="w3l-table-info">
-					  <h2>Manage Books</h2>
+					  <h2>Manage Sellers</h2>
 					    <table id="table">
 						<thead>
 						  <tr>
 						  <th>#</th>
-							<th >Name</th>
-							<th>Type</th>
-							<th>Author</th>
-							<th>Price(INR)</th>
+							<th>Name</th>
+							<th>Mobile No.</th>
+							<th>Email Id</th>
 							<th>Creation Date</th>
 							<th>Action</th>
 						  </tr>
 						</thead>
 						<tbody>
-<?php $sql = "SELECT * from tblbooks";
+<?php $sql = "SELECT * from tblusers where isActive=0";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
 if($query->rowCount() > 0)
 {
-foreach($results as $result)
-{				?>		
+      foreach($results as $result)
+      {				?>		
 						  <tr>
 							<td><?php echo htmlentities($cnt);?></td>
-							<td><?php echo htmlentities($result->BookName);?></td>
-							<td><?php echo htmlentities($result->BookType);?></td>
-							<td><?php echo htmlentities($result->BookAuthor);?></td>
-							<td><?php echo htmlentities($result->BookPrice);?></td>
-							<td><?php echo htmlentities($result->Creationdate);?></td>
-							<td><a href="update-package.php?pid=<?php echo htmlentities($result->BookId);?>"><button type="button" class="btn btn-primary btn-block">View Details</button></a></td>
+							<td><?php echo htmlentities($result->FullName);?></td>
+							<td><?php echo htmlentities($result->MobileNumber);?></td>
+							<td><?php echo htmlentities($result->EmailId);?></td>
+							<td><?php echo htmlentities($result->RegDate);?></td>
+							<td><a href="confirm_seller.php?eid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to confirm')" >Confirm</a>
+							</td>
 						  </tr>
-						 <?php $cnt=$cnt+1;} }?>
+						 <?php $cnt=$cnt+1;}}
+						 else {
+						     
+						   
+						         
+						         ?>
+						     <tr>
+						      <td colspan="6"><center>No data found</center></td>
+						     </tr>
+						     
+						     <?php 
+						     
+}?>
 						</tbody>
 					  </table>
 					</div>

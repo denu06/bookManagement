@@ -10,7 +10,7 @@ else{
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>TTMS | Admin Dashboard</title>
+<title>BMS | Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -107,8 +107,8 @@ $cnt2=$query2->rowCount();
 								<i class="glyphicon glyphicon-briefcase" aria-hidden="true"></i>
 							</div>
 							<div class="four-text">
-								<h3>Toatal packages</h3>
-																	<?php $sql3 = "SELECT PackageId from tbltourpackages";
+								<h3>Total Books</h3>
+																	<?php $sql3 = "SELECT BookId from tblbooks";
 $query3= $dbh -> prepare($sql3);
 $query3->execute();
 $results3=$query3->fetchAll(PDO::FETCH_OBJ);
@@ -123,7 +123,7 @@ $cnt3=$query3->rowCount();
 						<div class="clearfix"></div>
 				</div>
 
-		<div class="four-grids">
+		<!--<div class="four-grids">
 					<div class="col-md-3 four-grid">
 						<div class="four-w3ls">
 							<div class="icon">
@@ -146,7 +146,7 @@ $cnt5=$query5->rowCount();
 
 
 					<div class="clearfix"></div>
-				</div>
+				</div>-->
 <!--//four-grids here-->
 
 

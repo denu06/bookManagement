@@ -10,31 +10,29 @@ else{
 $pid=intval($_GET['pid']);	
 if(isset($_POST['submit']))
 {
-$pname=$_POST['packagename'];
-$ptype=$_POST['packagetype'];	
-$plocation=$_POST['packagelocation'];
-$pprice=$_POST['packageprice'];	
-$pfeatures=$_POST['packagefeatures'];
-$pdetails=$_POST['packagedetails'];	
-$pimage=$_FILES["packageimage"]["name"];
-$sql="update TblTourPackages set PackageName=:pname,PackageType=:ptype,PackageLocation=:plocation,PackagePrice=:pprice,PackageFetures=:pfeatures,PackageDetails=:pdetails where PackageId=:pid";
+$pname=$_POST['bookname'];
+$ptype=$_POST['booktype'];	
+$pprice=$_POST['bookprice'];	
+$pauthor=$_POST['bookfeatures'];
+$pdetails=$_POST['bookdetails'];	
+$pimage=$_FILES["bookimage"]["name"];
+$sql="update tblbooks set BookName=:pname,BookType=:ptype,BookPrice=:pprice,BookAuthor=:pauthor,BookDetails=:pdetails where BookId=:pid";
 $query = $dbh->prepare($sql);
 $query->bindParam(':pname',$pname,PDO::PARAM_STR);
 $query->bindParam(':ptype',$ptype,PDO::PARAM_STR);
-$query->bindParam(':plocation',$plocation,PDO::PARAM_STR);
 $query->bindParam(':pprice',$pprice,PDO::PARAM_STR);
-$query->bindParam(':pfeatures',$pfeatures,PDO::PARAM_STR);
+$query->bindParam(':pauthor',$pauthor,PDO::PARAM_STR);
 $query->bindParam(':pdetails',$pdetails,PDO::PARAM_STR);
 $query->bindParam(':pid',$pid,PDO::PARAM_STR);
 $query->execute();
-$msg="Package Updated Successfully";
+$msg="Book Updated Successfully";
 }
 
 	?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>TTMS | Admin Package Creation</title>
+<title>Book Management System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Pooled Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -80,14 +78,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 <!--heder end here-->
 	<ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Update Tour Package </li>
+                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Update Book </li>
             </ol>
 		<!--grid-->
  	<div class="grid-form">
  
 <!---->
   <div class="grid-form1">
-  	       <h3>Update Package</h3>
+  	       <h3>Update Book</h3>
   	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
   	         <div class="tab-content">
@@ -95,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						
 <?php 
 $pid=intval($_GET['pid']);
-$sql = "SELECT * from TblTourPackages where PackageId=:pid";
+$sql = "SELECT * from tblbooks where BookId=:pid";
 $query = $dbh -> prepare($sql);
 $query -> bindParam(':pid', $pid, PDO::PARAM_STR);
 $query->execute();
@@ -106,52 +104,47 @@ if($query->rowCount() > 0)
 foreach($results as $result)
 {	?>
 
-							<form class="form-horizontal" name="package" method="post" enctype="multipart/form-data">
+							<form class="form-horizontal" name="book" method="post" enctype="multipart/form-data">
 								<div class="form-group">
-									<label for="focusedinput" class="col-sm-2 control-label">Package Name</label>
+									<label for="focusedinput" class="col-sm-2 control-label">Book Name</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control1" name="packagename" id="packagename" placeholder="Create Package" value="<?php echo htmlentities($result->PackageName);?>" required>
+										<input type="text" class="form-control1" name="bookname" id="bookname" placeholder="Book Name" value="<?php echo htmlentities($result->BookName);?>" required>
 									</div>
 								</div>
 <div class="form-group">
-									<label for="focusedinput" class="col-sm-2 control-label">Package Type</label>
+									<label for="focusedinput" class="col-sm-2 control-label">Book Type</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control1" name="packagetype" id="packagetype" placeholder=" Package Type eg- Family Package / Couple Package" value="<?php echo htmlentities($result->PackageType);?>" required>
+										<input type="text" class="form-control1" name="booktype" id="booktype" placeholder=" Book Type" value="<?php echo htmlentities($result->BookType);?>" required>
+									</div>
+								</div>
+
+
+
+<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">Book Price in INR</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" name="bookprice" id="bookprice" placeholder=" Book Price is INR" value="<?php echo htmlentities($result->BookPrice);?>" required>
 									</div>
 								</div>
 
 <div class="form-group">
-									<label for="focusedinput" class="col-sm-2 control-label">Package Location</label>
+									<label for="focusedinput" class="col-sm-2 control-label">Book Author</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control1" name="packagelocation" id="packagelocation" placeholder=" Package Location" value="<?php echo htmlentities($result->PackageLocation);?>" required>
-									</div>
-								</div>
-
-<div class="form-group">
-									<label for="focusedinput" class="col-sm-2 control-label">Package Price in USD</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control1" name="packageprice" id="packageprice" placeholder=" Package Price is USD" value="<?php echo htmlentities($result->PackagePrice);?>" required>
-									</div>
-								</div>
-
-<div class="form-group">
-									<label for="focusedinput" class="col-sm-2 control-label">Package Features</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control1" name="packagefeatures" id="packagefeatures" placeholder="Package Features Eg-free Pickup-drop facility" value="<?php echo htmlentities($result->PackageFetures);?>" required>
+										<input type="text" class="form-control1" name="bookfeatures" id="bookfeatures" placeholder="Book Author" value="<?php echo htmlentities($result->BookAuthor);?>" required>
 									</div>
 								</div>		
 
 
 <div class="form-group">
-									<label for="focusedinput" class="col-sm-2 control-label">Package Details</label>
+									<label for="focusedinput" class="col-sm-2 control-label">Book Details</label>
 									<div class="col-sm-8">
-										<textarea class="form-control" rows="5" cols="50" name="packagedetails" id="packagedetails" placeholder="Package Details" required><?php echo htmlentities($result->PackageDetails);?></textarea> 
+										<textarea class="form-control" rows="5" cols="50" name="bookdetails" id="bookdetails" placeholder="Book Details" required><?php echo htmlentities($result->BookDetails);?></textarea> 
 									</div>
 								</div>															
 <div class="form-group">
-<label for="focusedinput" class="col-sm-2 control-label">Package Image</label>
+<label for="focusedinput" class="col-sm-2 control-label">Book Image</label>
 <div class="col-sm-8">
-<img src="pacakgeimages/<?php echo htmlentities($result->PackageImage);?>" width="200">&nbsp;&nbsp;&nbsp;<a href="change-image.php?imgid=<?php echo htmlentities($result->PackageId);?>">Change Image</a>
+<img src="pacakgeimages/<?php echo htmlentities($result->BookImage);?>" width="200">&nbsp;&nbsp;&nbsp;<a href="change-image.php?imgid=<?php echo htmlentities($result->BookId);?>">Change Image</a>
 </div>
 </div>
 

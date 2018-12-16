@@ -89,6 +89,7 @@ else{
 							<th>Name</th>
 							<th>Mobile No.</th>
 							<th>Email Id</th>
+							<th>Role</th>
 							<th>RegDate </th>
 							<th>Updation Date</th>
 						  </tr>
@@ -108,6 +109,7 @@ foreach($results as $result)
 							<td><?php echo htmlentities($result->FullName);?></td>
 							<td><?php echo htmlentities($result->MobileNumber);?></td>
 							<td><?php echo htmlentities($result->EmailId);?></td>
+							<td><?php echo htmlentities($result->Role);?></td>
 							<td><?php echo htmlentities($result->RegDate);?></td>
 							<td><?php echo htmlentities($result->UpdationDate);?></td>
 						  </tr>
