@@ -7,7 +7,7 @@ if(isset($_POST['submit2']))
 $bid=intval($_GET['pkgid']);
 $useremail=$_SESSION['login'];
 
-$status=0;
+$status=1;
 $sql="INSERT INTO tblbooking(BookId,UserEmail,status) VALUES(:bid,:useremail,:status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':bid',$bid,PDO::PARAM_STR);
@@ -108,7 +108,7 @@ foreach($results as $result)
 			</div>
 			<div class="col-md-8 selectroom_right wow fadeInRight animated" data-wow-delay=".5s">
 				<h2><?php echo htmlentities($result->BookName);?></h2>
-				<p class="dow">#PKG-<?php echo htmlentities($result->BookId);?></p>
+				<p class="dow">#No-<?php echo htmlentities($result->BookId);?></p>
 				<p><b>Book Type :</b> <?php echo htmlentities($result->BookType);?></p>
 					<p><b>Book Author</b> <?php echo htmlentities($result->BookAuthor);?></p>
 					<!-- <div class="ban-bottom">
@@ -149,7 +149,7 @@ foreach($results as $result)
 					<button type="submit" name="submit2" class="btn-primary btn">Book</button>
 						</li>
 						<?php } else {?>
-							<li class="sigi" align="center" style="margin-top: 1%">
+							<li class="spe" align="center" style="margin-top: 1%">
 							<a href="#" data-toggle="modal" data-target="#myModal4" class="btn-primary btn" > Book</a></li>
 							<?php } ?>
 					<div class="clearfix"></div>
@@ -163,8 +163,7 @@ foreach($results as $result)
 
 	</div>
 </div>
-<!--- /selectroom ---->
-<<!--- /footer-top ---->
+
 <?php include('includes/footer.php');?>
 <!-- signup -->
 <?php include('includes/signup.php');?>			

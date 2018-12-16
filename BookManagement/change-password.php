@@ -25,7 +25,7 @@ $chngpwd1 = $dbh->prepare($con);
 $chngpwd1-> bindParam(':email', $email, PDO::PARAM_STR);
 $chngpwd1-> bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
 $chngpwd1->execute();
-$msg="Your Password succesfully changed";
+$msg="Your Password successfully changed";
 }
 else {
 $error="Your current password is wrong";	
@@ -36,7 +36,7 @@ $error="Your current password is wrong";
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>TMS | Tourism Management System</title>
+<title>Book Management System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Tourism Management System In PHP" />
@@ -93,7 +93,7 @@ return true;
 <?php include('includes/header.php');?>
 <div class="banner-1 ">
 	<div class="container">
-		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">TMS-Tourism Management System</h1>
+		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">Book Management System</h1>
 	</div>
 </div>
 <!--- /banner-1 ---->

@@ -115,7 +115,7 @@ foreach($results as $result)
 				</div>
 				<div class="col-md-3 room-right wow fadeInRight animated" data-wow-delay=".5s">
 					<h5>INR <?php echo htmlentities($result->BookPrice);?></h5>
-					<a href="package-details.php?pkgid=<?php echo htmlentities($result->BookId);?>" class="view">Details</a>
+					<a href="book-details.php?pkgid=<?php echo htmlentities($result->BookId);?>" class="view">Details</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -123,7 +123,7 @@ foreach($results as $result)
 <?php }} ?>
 			
 		
-<div><a href="package-list.php" class="view">View More Books</a></div>
+<div><a href="book-list.php" class="view">View More Books</a></div>
 </div>
 			<div class="clearfix"></div>
 	</div>
@@ -131,7 +131,7 @@ foreach($results as $result)
 
 
 <!--- routes ---->
-
+<!---
 <div class="routes">
 	<div class="container">
 		<div class="col-md-4 routes-left wow fadeInRight animated" data-wow-delay=".5s">
@@ -167,7 +167,7 @@ foreach($results as $result)
 		<div class="clearfix"></div>
 	</div>
 </div>
-
+-->
 <?php include('includes/footer.php');?>
 <!-- signup -->
 <?php include('includes/signup.php');?>			

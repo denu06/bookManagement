@@ -75,7 +75,7 @@
 						<ul class="nav navbar-nav">
 							<li><a href="index.php">Home</a></li>
 							<li><a href="page.php?type=aboutus">About</a></li>
-								<!-- <li><a href="package-list.php">Tour Packages</a></li> -->
+								<!-- <li><a href="book-list.php">Tour Packages</a></li> -->
 								<li><a href="page.php?type=privacy">Privacy Policy</a></li>
 								<li><a href="page.php?type=terms">Terms of Use</a></li>
 								<li><a href="page.php?type=contact">Contact Us</a></li>
