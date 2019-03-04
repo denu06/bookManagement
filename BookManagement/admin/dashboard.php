@@ -84,7 +84,7 @@ $sql = "SELECT id from tblusers where isActive=1";
     $id = $_SESSION['id'];
     $role = $_SESSION['role'];
     if ($role == 'Seller') {
-        $sql1 = "SELECT BookingId from tblbooking where userId=$id";
+        $sql1 = "SELECT BookingId from tblbooking tbg inner join tblbooks tbk on tbg.BookId=tbk.BookId where tbk.userId=$id";
     } else {
         $sql1 = "SELECT BookingId from tblbooking";
     }
