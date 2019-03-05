@@ -12,7 +12,7 @@ if(isset($_POST['submit']))
 {
 
 $pimage=$_FILES["bookimage"]["name"];
-move_uploaded_file($_FILES["bookimage"]["tmp_name"],"pacakgeimages/".$_FILES["bookimage"]["name"]);
+move_uploaded_file($_FILES["bookimage"]["tmp_name"],"images/".$_FILES["bookimage"]["name"]);
 $sql="update tblbooks set BookImage=:pimage where BookId=:imgid";
 $query = $dbh->prepare($sql);
 
