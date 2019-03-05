@@ -184,7 +184,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										Image</label>
 									<div class="col-sm-8">
 										<img
-											src="pacakgeimages/<?php echo htmlentities($result->BookImage);?>"
+											src="images/<?php echo htmlentities($result->BookImage);?>"
 											width="200">&nbsp;&nbsp;&nbsp;<a
 											href="change-image.php?imgid=<?php echo htmlentities($result->BookId);?>">Change
 											Image</a>

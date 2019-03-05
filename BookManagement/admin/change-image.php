@@ -103,7 +103,7 @@ foreach($results as $result)
 <div class="form-group">
 <label for="focusedinput" class="col-sm-2 control-label"> Book Image </label>
 <div class="col-sm-8">
-<img src="pacakgeimages/<?php echo htmlentities($result->BookImage);?>" width="200">
+<img src="images/<?php echo htmlentities($result->BookImage);?>" width="200">
 </div>
 </div>
 																					
