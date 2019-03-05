@@ -14,7 +14,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         $pdetails = $_POST['bookdetails'];
         $quantity = $_POST['quantity'];
         $pimage = $_FILES["bookimage"]["name"];
-        $status = move_uploaded_file($_FILES["bookimage"]["tmp_name"], "pacakgeimages/" . $_FILES["bookimage"]["name"]);
+        $status = move_uploaded_file($_FILES["bookimage"]["tmp_name"], "images/" . $_FILES["bookimage"]["name"]);
         echo $status;
         $sql = "INSERT INTO tblbooks(userId,BookName,BookType,BookAuthor,BookPrice,BookDetails,quantity,BookImage) VALUES(:userId,:pname,:ptype,:pauthor,:pprice,:pdetails,:quantity,:pimage)";
         $query = $dbh->prepare($sql);

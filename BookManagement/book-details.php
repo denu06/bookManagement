@@ -160,7 +160,7 @@ if ($query->rowCount() > 0) {
 					<div class="col-md-4 selectroom_left wow fadeInLeft animated"
 						data-wow-delay=".5s">
 						<img
-							src="admin/pacakgeimages/<?php echo htmlentities($result->BookImage);?>"
+							src="admin/images/<?php echo htmlentities($result->BookImage);?>"
 							class="img-responsive" alt="">
 					</div>
 					<div class="col-md-8 selectroom_right wow fadeInRight animated"
