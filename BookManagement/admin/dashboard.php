@@ -4,6 +4,21 @@ include ('../includes/config.php');
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
+    $storeActive=false;
+    $role = $_SESSION['role'];
+    $id = $_SESSION['id'];
+
+    if ($role == 'Seller') {
+        $sql = "SELECT * from tblusers where isStoreActive=1 and id=$id";
+        $query = $dbh->prepare($sql);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_OBJ);
+        $cnt = $query->rowCount();
+        if ($cnt > 0) {
+            $storeActive = true;
+        } 
+    }
+
     ?>
 <!DOCTYPE HTML>
 <html>
@@ -14,6 +29,11 @@ if (strlen($_SESSION['alogin']) == 0) {
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link
+	href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
+	rel="stylesheet">
+
+
 <!-- Custom CSS -->
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="css/morris.css" type="text/css" />
@@ -32,13 +52,26 @@ if (strlen($_SESSION['alogin']) == 0) {
 <!-- //lined-icons -->
 </head>
 <body>
+
 	<div class="page-container">
+
 		<!--/content-inner-->
 		<div class="left-content">
 			<div class="mother-grid-inner">
 				<!--header start here-->
 <?php include('includes/header.php');?>
 <!--header end here-->
+
+<?php if($role=='Seller'){ ?>
+				<br>
+				<div class="col-4">
+
+					<b>Store Status: </b> <input id="toggle-event" type="checkbox"
+						data-toggle="toggle" data-on="Active" data-off="InActive">
+				</div>
+
+<?php }?>
+
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="dashboard.php">Home</a> <i
 						class="fa fa-angle-right"></i></li>
@@ -47,7 +80,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 				<div class="four-grids">
 		
 	<?php
-    if ($_SESSION['role'] == "Admin") {
+    if ($role == "Admin") {
         ?>
 		
 					<div class="col-md-3 four-grid">
@@ -60,7 +93,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 								<?php
 
-$sql = "SELECT id from tblusers where isActive=1";
+        $sql = "SELECT id from tblusers where isActive=1";
         $query = $dbh->prepare($sql);
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -81,8 +114,6 @@ $sql = "SELECT id from tblusers where isActive=1";
 								<h3>Bookings</h3>
 										<?php
 
-    $id = $_SESSION['id'];
-    $role = $_SESSION['role'];
     if ($role == 'Seller') {
         $sql1 = "SELECT BookingId from tblbooking tbg inner join tblbooks tbk on tbg.BookId=tbk.BookId where tbk.userId=$id";
     } else {
@@ -102,7 +133,7 @@ $sql = "SELECT id from tblusers where isActive=1";
 					</div>
 					
 					<?php
-    if ($_SESSION['role'] == "Admin") {
+    if ($role == "Admin") {
         ?>
 					
 					<div class="col-md-3 four-grid">
@@ -114,7 +145,7 @@ $sql = "SELECT id from tblusers where isActive=1";
 								<h3>Enquiries</h3>
 												<?php
 
-$sql2 = "SELECT id from tblenquiry";
+        $sql2 = "SELECT id from tblenquiry";
         $query2 = $dbh->prepare($sql2);
         $query2->execute();
         $results2 = $query2->fetchAll(PDO::FETCH_OBJ);
@@ -138,8 +169,6 @@ $sql2 = "SELECT id from tblenquiry";
 								<h3>Total Books</h3>
 																	<?php
 
-    $id = $_SESSION['id'];
-    $role = $_SESSION['role'];
     if ($role == 'Seller') {
         $sql3 = "SELECT BookId from tblbooks where userId=$id";
     } else {
@@ -170,7 +199,7 @@ $sql2 = "SELECT id from tblenquiry";
 								<h3>Issues Riaised</h3>
 												<?php
 
-$sql5 = "SELECT id from tblissues";
+    $sql5 = "SELECT id from tblissues";
     $query5 = $dbh->prepare($sql5);
     $query5->execute();
     $results5 = $query5->fetchAll(PDO::FETCH_OBJ);
@@ -225,13 +254,50 @@ $sql5 = "SELECT id from tblissues";
 	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
+	<script
+		src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 	<!-- /Bootstrap Core JavaScript -->
 	<!-- morris JavaScript -->
 	<script src="js/raphael-min.js"></script>
 	<script src="js/morris.js"></script>
 	<script>
+
+	
+	  $(function() {
+	    $('#toggle-event').change(function() {
+	    	 var id='<?php echo $id; ?>';
+	    	 var info = 'id=' + id+'&status='+$(this).prop('checked');
+	    	  $.ajax({
+	                type : "POST",
+	                url : "ajaxCall.php", //URL to the delete php script
+	                data : info,
+	                success : function(result) {
+					//alert(result);
+	                } 
+	            });
+	    })
+	  })
+	
+
+	
 	$(document).ready(function() {
 		//BOX BUTTON SHOW AND CLOSE
+		
+        var storeActive = '<?php echo $storeActive; ?>';
+        var role='<?php echo $role; ?>';
+        if(role=='Seller')
+        {
+        	if(storeActive)
+        	{
+    			$('#toggle-event').bootstrapToggle('on');
+        	}
+        	else
+        	{
+    			$('#toggle-event').bootstrapToggle('off');
+        	}
+        }  
+		
+		
 	   jQuery('.small-graph-box').hover(function() {
 		  jQuery(this).find('.box-button').fadeIn('fast');
 	   }, function() {
