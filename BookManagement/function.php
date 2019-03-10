@@ -24,10 +24,10 @@ function send_mail($to, $subject,$body)
     
     $mail->Body = $body;
     
-    if(!$mail->send()) {
-        return 'false';
+    if($mail->send()) {
+        return true;
     } else {
-        return 'true';
+        return false;
     }
 }
 

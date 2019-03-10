@@ -34,7 +34,7 @@ else{
 $(function() {
     $(".delbutton").click(function() {
         var del_id = $(this).attr("id");
-        var info = 'id=' + del_id;
+        var info = 'id=' + del_id+'&type=user';
         if (confirm("Are you sure you want to delete this user?")) {
             $.ajax({
                 type : "POST",
@@ -134,7 +134,7 @@ foreach($results as $result)
 							<td><?php echo htmlentities($result->Role);?></td>
 							<td><?php echo htmlentities($result->RegDate);?></td>
 							<td><?php echo htmlentities($result->UpdationDate);?></td>
-								<td><button id="<?php echo htmlentities($result->id);?>" class="delbutton btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>
+								<td><p data-placement="top" data-toggle="tooltip" title="Delete"><button id="<?php echo htmlentities($result->id);?>" class="btn btn-danger btn-xs delbutton" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
 						  </tr>
 						 <?php $cnt=$cnt+1;} }?>
 						</tbody>

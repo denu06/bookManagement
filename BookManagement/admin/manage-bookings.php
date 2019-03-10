@@ -7,7 +7,7 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{ 
-	// code for cancel
+	/* // code for cancel
 if(isset($_REQUEST['bkid']))
 	{
 $bid=intval($_GET['bkid']);
@@ -37,14 +37,14 @@ $query -> execute();
 $msg="Booking Confirm successfully";
 }
 
-
+ */
 
 
 	?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>TTMS | Admin manage Bookings</title>
+<title>BMS | Admin manage Bookings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -128,19 +128,19 @@ $msg="Booking Confirm successfully";
 					    <table id="table">
 						<thead>
 						  <tr>
-						  <th>Booikn id</th>
-							<th>Name</th>
+						  	<th>Id</th>
+							<th>Buyer Name</th>
+							<th>Book Name</th>
+							<th>Price</th>
 							<th>Mobile No.</th>
 							<th>Email Id</th>
-							<th>RegDate </th>
-							<th>From /To </th>
-							<th>Comment </th>
-							<th>Status </th>
-							<th>Action </th>
+							<th>Booking Date</th>
 						  </tr>
 						</thead>
 						<tbody>
-<?php $sql = "SELECT tblbooking.BookingId as bookid,tblusers.FullName as fname,tblusers.MobileNumber as mnumber,tblusers.EmailId as email,tbltourpackages.PackageName as pckname,tblbooking.PackageId as pid,tblbooking.FromDate as fdate,tblbooking.ToDate as tdate,tblbooking.Comment as comment,tblbooking.status as status,tblbooking.CancelledBy as cancelby,tblbooking.UpdationDate as upddate from tblusers join  tblbooking on  tblbooking.UserEmail=tblusers.EmailId join tbltourpackages on tbltourpackages.PackageId=tblbooking.PackageId";
+<?php 
+$id=$_SESSION['id'];
+$sql = "SELECT BookingId,FullName,BookName,BookPrice,MobileNumber,EmailId,tbkg.RegDate,status FROM tblbooks tbk inner join tblbooking tbkg on tbk.BookId=tbkg.BookId and tbk.userId=$id inner join tblusers tblus on tblus.id=tbkg.userId order by tbkg.RegDate desc;";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -150,45 +150,19 @@ if($query->rowCount() > 0)
 foreach($results as $result)
 {				?>		
 						  <tr>
-							<td>#BK-<?php echo htmlentities($result->bookid);?></td>
-							<td><?php echo htmlentities($result->fname);?></td>
-							<td><?php echo htmlentities($result->mnumber);?></td>
-							<td><?php echo htmlentities($result->email);?></td>
-							<td><a href="update-book.php?pid=<?php echo htmlentities($result->pid);?>"><?php echo htmlentities($result->pckname);?></a></td>
-							<td><?php echo htmlentities($result->fdate);?> To <?php echo htmlentities($result->tdate);?></td>
-								<td><?php echo htmlentities($result->comment);?></td>
-								<td><?php if($result->status==0)
-{
-echo "Pending";
-}
-if($result->status==1)
-{
-echo "Confirmed";
-}
-if($result->status==2 and  $result->cancelby=='a')
-{
-echo "Canceled by you at " .$result->upddate;
-} 
-if($result->status==2 and $result->cancelby=='u')
-{
-echo "Canceled by User at " .$result->upddate;
-
-}
-?></td>
-
-<?php if($result->status==2)
-{
-	?><td>Cancelled</td>
-<?php } else {?>
-<td><a href="manage-bookings.php?bkid=<?php echo htmlentities($result->bookid);?>" onclick="return confirm('Do you really want to cancel booking')" >Cancel</a> / <a href="manage-bookings.php?bckid=<?php echo htmlentities($result->bookid);?>" onclick="return confirm('Do you really want to cancel booking')" >Confirm</a></td>
-<?php }?>
-
+							<td>#BK-<?php echo htmlentities($result->BookingId);?></td>
+							<td><?php echo htmlentities($result->FullName);?></td>
+							<td><?php echo htmlentities($result->BookName);?></td>
+							<td><?php echo htmlentities($result->BookPrice);?></td>
+							<td><?php echo htmlentities($result->MobileNumber);?></td>
+							<td><?php echo htmlentities($result->EmailId);?></td>
+							<td><?php echo htmlentities($result->RegDate);?></td>
+							
 						  </tr>
 						 <?php $cnt=$cnt+1;} }?>
 						</tbody>
 					  </table>
 					</div>
-				  </table>
 
 				
 			</div>

@@ -1814,11 +1814,12 @@ code {
     background-color: #2a3342;
     border-color: rgba(0, 0, 0, 0.05);
 }
+/* 
 .btn-primary {
     color: #fff;
     background-color: #00bcd4;
 }
-.btn-danger {
+ .btn-danger {
     color: #fff;
     background-color: #fcb216;
     border-color: #fcb216;
@@ -1827,7 +1828,7 @@ code {
     color: #fff;
     background-color: #2d2d2d;
     border-color: #2d2d2d;
-}
+} */
 .btn-xs, .btn-group-xs > .btn {
     padding: 3px 8px;
     font-size: 11px;
@@ -1844,11 +1845,11 @@ code {
     width: 105px;
     font-size: 1em;
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+/* .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
     color: #fff;
     background-color: #2a3342;
     border-color: rgba(0, 0, 0, 0.05);
-}
+} */
 .w3layouts-map {
     margin-bottom: 1em;
 }
@@ -3804,7 +3805,7 @@ h2.agileits-icons-title,h3.agileits-icons-title {
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-	color: #777;
+	color: #ffffff;
 } 
 .bs-glyphicons .glyphicon-class {
     display: block;

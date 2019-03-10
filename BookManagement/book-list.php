@@ -52,7 +52,7 @@ include('includes/config.php');
 
 $searchKey=$_REQUEST['searchKey'];
 
-$sql = "SELECT * from tblbooks where BookName LIKE '%$searchKey%' or BookAuthor LIKE '%$searchKey%' or BookType LIKE '%$searchKey%'"; //Changed the table name need to restore
+$sql = "SELECT * from tblbooks where isActive=1 and (BookName LIKE '%$searchKey%' or BookAuthor LIKE '%$searchKey%' or BookType LIKE '%$searchKey%')"; //Changed the table name need to restore
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);

@@ -30,6 +30,32 @@ else{
 <link rel="stylesheet" type="text/css" href="css/basictable.css" />
 <script type="text/javascript" src="js/jquery.basictable.min.js"></script>
 <script type="text/javascript">
+
+
+
+$(function() {
+    $(".delbutton").click(function() {
+        var del_id = $(this).attr("id");
+        var info = 'id=' + del_id+'&type=book';
+        if (confirm("Are you sure you want to delete this book?")) {
+            $.ajax({
+                type : "POST",
+                url : "delete_entry.php", //URL to the delete php script
+                data : info,
+                success : function(result) {
+				alert(result);
+				location.reload();
+                }
+            });
+        }
+        return false;
+    });
+}); 
+
+
+
+
+
     $(document).ready(function() {
       $('#table').basictable();
 
@@ -92,7 +118,8 @@ else{
 							<th>Price(INR)</th>
 							<th>Quantity</th>
 							<th>Creation Date</th>
-							<th>Action</th>
+							<th>Edit</th>
+							<th>Delete</th>
 						  </tr>
 						</thead>
 						<tbody>
@@ -101,10 +128,10 @@ $id=$_SESSION['id'];
 $role=$_SESSION['role'];
 if($role=='Seller')
 {
-    $sql = "SELECT * from tblbooks where userId=$id";
+    $sql = "SELECT * from tblbooks where isActive=1 and userId=$id";
 }
 else{
-    $sql = "SELECT * from tblbooks";
+    $sql = "SELECT * from tblbooks where isActive=1";
     
 }
 
@@ -124,15 +151,13 @@ foreach($results as $result)
 							<td><?php echo htmlentities($result->BookPrice);?></td>
 							<td><?php echo htmlentities($result->quantity);?></td>
 							<td><?php echo htmlentities($result->Creationdate);?></td>
-							<td><a href="update-book.php?pid=<?php echo htmlentities($result->BookId);?>"><button type="button" class="btn btn-primary btn-block">View Details</button></a></td>
-						  </tr>
+							<td><p data-placement="top" data-toggle="tooltip" title="Edit"><a href="update-book.php?pid=<?php echo htmlentities($result->BookId);?>"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></a></p></td>
+    						<td><p data-placement="top" data-toggle="tooltip" title="Delete"><button id="<?php echo htmlentities($result->BookId);?>" class="btn btn-danger btn-xs delbutton" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+   						  </tr>
 						 <?php $cnt=$cnt+1;} }?>
 						</tbody>
 					  </table>
 					</div>
-				  </table>
-
-				
 			</div>
 <!-- script-for sticky-nav -->
 		<script>

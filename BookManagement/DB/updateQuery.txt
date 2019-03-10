@@ -1,0 +1,4 @@
+
+
+ALTER TABLE `bms`.`tblbooks` 
+ADD COLUMN `isActive` TINYINT(1) NOT NULL DEFAULT 1 AFTER `BookImage`;
