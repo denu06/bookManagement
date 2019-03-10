@@ -52,7 +52,7 @@ include('includes/config.php');
 
 $searchKey=$_REQUEST['searchKey'];
 
-$sql = "SELECT * from tblbooks where isActive=1 and (BookName LIKE '%$searchKey%' or BookAuthor LIKE '%$searchKey%' or BookType LIKE '%$searchKey%')"; //Changed the table name need to restore
+$sql = "SELECT tb.* from tblbooks tb inner join tblusers tu on tb.userId=tu.id where tb.isActive=1 and tu.isActive=1 and tu.isStoreActive=1 and (tb.BookName LIKE '%$searchKey%' or tb.BookAuthor LIKE '%$searchKey%' or tb.BookType LIKE '%$searchKey%')"; //Changed the table name need to restore
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -72,7 +72,7 @@ foreach($results as $result)
 				</div>
 				<div class="col-md-3 room-right wow fadeInRight animated" data-wow-delay=".5s">
 					<h5>INR <?php echo htmlentities($result->BookPrice);?></h5>
-					<a href="book-details.php?pkgid=<?php echo htmlentities($result->BookId);?>" class="view">Details</a>
+					<a href="book-details.php?id=<?php echo htmlentities($result->BookId);?>" class="view">Details</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>

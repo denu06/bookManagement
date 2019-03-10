@@ -29,9 +29,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<link
-	href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
-	rel="stylesheet">
+
 
 
 <!-- Custom CSS -->
@@ -63,12 +61,20 @@ if (strlen($_SESSION['alogin']) == 0) {
 <!--header end here-->
 
 <?php if($role=='Seller'){ ?>
-				<br>
-				<div class="col-4">
 
-					<b>Store Status: </b> <input id="toggle-event" type="checkbox"
-						data-toggle="toggle" data-on="Active" data-off="InActive">
+
+
+				<br>
+				 <div class="row col-sm-3">
+
+					<b>Store Status: </b> <label class="switch">
+  <input id="my-toggle" type="checkbox">
+  <span class="slider round"></span>
+</label>
 				</div>
+				<div class="row"></div> 
+				
+
 
 <?php }?>
 
@@ -254,8 +260,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-	<script
-		src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
 	<!-- /Bootstrap Core JavaScript -->
 	<!-- morris JavaScript -->
 	<script src="js/raphael-min.js"></script>
@@ -264,7 +269,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 	
 	  $(function() {
-	    $('#toggle-event').change(function() {
+	    $('#my-toggle').change(function() {
 	    	 var id='<?php echo $id; ?>';
 	    	 var info = 'id=' + id+'&status='+$(this).prop('checked');
 	    	  $.ajax({
@@ -289,11 +294,12 @@ if (strlen($_SESSION['alogin']) == 0) {
         {
         	if(storeActive)
         	{
-    			$('#toggle-event').bootstrapToggle('on');
+    			$('#my-toggle').prop('checked', true);
+
         	}
         	else
         	{
-    			$('#toggle-event').bootstrapToggle('off');
+    			$('#my-toggle').prop('checked', false);
         	}
         }  
 		

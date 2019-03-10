@@ -6,7 +6,7 @@ include ('function.php');
 
 if (isset($_POST['submit2'])) {
 
-    $bid = intval($_GET['pkgid']);
+    $bid = intval($_GET['id']);
     $userId = $_SESSION['id'];
     $email = $_SESSION['login'];
 
@@ -147,8 +147,8 @@ if (isset($_POST['submit2'])) {
         ?><div class="succWrap">
 				<strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 <?php
-$pid = intval($_GET['pkgid']);
-$sql = "SELECT * from tblbooks tb INNER JOIN tblusers tu on tb.userId=tu.id where BookId=:pid and tb.isActive=1";
+$pid = intval($_GET['id']);
+$sql = "SELECT * from tblbooks tb INNER JOIN tblusers tu on tb.userId=tu.id where BookId=:pid and tb.isActive=1 and tu.isActive=1 and tu.isStoreActive=1";
 $query = $dbh->prepare($sql);
 $query->bindParam(':pid', $pid, PDO::PARAM_STR);
 $query->execute();

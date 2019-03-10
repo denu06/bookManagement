@@ -95,7 +95,7 @@ include('includes/config.php');
 	<h3>Books List</h3>
 
 					
-<?php $sql = "SELECT * from tblbooks where isActive=1 order by rand() limit 4"; // //Changed the table name need to restore
+<?php $sql = "SELECT tb.* from tblbooks tb inner join tblusers tu on tb.userId=tu.id where tb.isActive=1 and tu.isActive=1 and tu.isStoreActive=1 order by rand() limit 4"; // //Changed the table name need to restore
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
