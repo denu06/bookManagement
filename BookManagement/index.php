@@ -115,7 +115,7 @@ foreach($results as $result)
 				</div>
 				<div class="col-md-3 room-right wow fadeInRight animated" data-wow-delay=".5s">
 					<h5>INR <?php echo htmlentities($result->BookPrice);?></h5>
-					<a href="book-details.php?pkgid=<?php echo htmlentities($result->BookId);?>" class="view">Details</a>
+					<a href="book-details.php?id=<?php echo htmlentities($result->BookId);?>" class="view">Details</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
